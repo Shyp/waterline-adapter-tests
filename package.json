@@ -2,24 +2,19 @@
   "name": "waterline-adapter-tests",
   "description": "Integration tests for waterline adapters",
   "version": "0.10.15",
-  "author": "Cody Stoltman <particlebanana@gmail.com>",
+  "author": "Shyp Engineering <engineering@shyp.com>",
   "dependencies": {
     "async": "^1.4",
     "bluebird": "~2.9.0",
     "lodash": "^3.10",
-    "mocha": "~2.2.5",
-    "sails-memory": "balderdashy/sails-memory",
+    "mocha": "^2.3.4",
     "should": "^7.0",
-    "waterline": "~0.10.0"
+    "waterline": "git+https://github.com/Shyp/waterline.git#shyp-master-0.10.13"
   },
   "devDependencies": {
     "jpath": "^0.0.20",
     "npm": "^2.7.4",
-    "sails-disk": "balderdashy/sails-disk",
-    "sails-mongo": "balderdashy/sails-mongo",
-    "sails-mysql": "balderdashy/sails-mysql",
-    "sails-postgresql": "balderdashy/sails-postgresql",
-    "sails-redis": "balderdashy/sails-redis"
+    "sails-postgresql": "git+https://github.com/Shyp/sails-postgresql.git#shyp-master-0.10.15"
   },
   "keywords": [
     "orm",
@@ -32,7 +27,7 @@
     "mongo"
   ],
   "repository": "git://github.com/balderdashy/waterline-adapter-tests.git",
-  "homepage": "http://github.com/balderdashy/waterline-adapter-tests",
+  "homepage": "https://github.com/balderdashy/waterline-adapter-tests",
   "main": "./lib/index.js",
   "scripts": {
     "test": "node test/integration/runnerDispatcher.js",

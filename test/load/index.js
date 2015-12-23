@@ -1,7 +1,7 @@
 var exec = require('child_process').exec,
     async = require('async');
 
-var adapters = ['sails-postgresql', 'sails-memory', 'sails-disk', 'sails-mongo', 'sails-mysql', 'sails-redis'];
+var adapters = ['sails-postgresql'];
 if (process.argv.length > 2) {
   adapters = process.argv.splice(2);
 }
@@ -15,7 +15,7 @@ async.eachSeries(adapters, function(adapterName, next){
   console.log("\033[0;34m                                     %s \033[0m", adapterName);
   console.log("\033[0;34m-------------------------------------------------------------------------------------------\033[0m");
   console.log();
-  
+
   var child = exec('node ./test/load/runner.js ' + adapterName);
   child.stdout.on('data', function(data){
     process.stdout.write(data);
@@ -27,7 +27,7 @@ async.eachSeries(adapters, function(adapterName, next){
     console.log('closing code: ' + code);
     next();
   });
-  
+
 }, function allDone(err, results){
   console.timeEnd('total time elapsed');
 });

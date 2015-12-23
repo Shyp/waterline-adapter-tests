@@ -82,7 +82,8 @@ describe('Association Interface', function() {
     // TEST METHODS
     ////////////////////////////////////////////////////
 
-    it('should not destroy any join table records', function (done) {
+    // XXX apply the method here
+    it.skip('should not destroy any join table records', function (done) {
       Associations.Driver.destroy({ name: 'manymany destroy_foo' }, function (err, status) {
         assert(!err);
 

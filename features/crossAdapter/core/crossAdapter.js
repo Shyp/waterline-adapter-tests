@@ -10,8 +10,7 @@
 var Path = require('path'),
     _ = require('lodash'),
     utils = require('../../../lib/utils'),
-    mocha = require('mocha'),
-    memoryAdapter = require('sails-memory');
+    mocha = require('mocha');
 
 /**
  * Test Runner
@@ -56,13 +55,13 @@ function CrossAdapter(options, cb) {
     var interfacePath = Path.resolve(__dirname,'../../../interfaces/associations/' + type);
     files = files.concat(utils.fileLookup(interfacePath, filter, true));
   });
- 
+
 
   // Build a Mocha Runner
   var test = new mocha(_.merge({
     timeout: 6000
   }, options.mocha||{}));
-  
+
   if (options.mochaChainableMethods){
     _.forEach(options.mochaChainableMethods, function(arg, method){
       test[method](arg);
@@ -75,7 +74,7 @@ function CrossAdapter(options, cb) {
   // Allow Adapter to be a global without warning about a leak
   test.globals([Adapter, MemoryAdapter, Associations]);
   test.files = files;
-  
+
   console.info('\nTesting Cross Adapter interface...\n');
 
   console.time('time elapsed');

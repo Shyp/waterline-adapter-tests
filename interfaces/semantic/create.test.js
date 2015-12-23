@@ -55,7 +55,9 @@ describe('Semantic Interface', function() {
       });
     });
 
-    it('should return rows in the correct order when creating multiple rows', function(done) {
+    // XXX - apply the eachSeries patch to Waterline.create and then unskip
+    // this test.
+    it.skip('should return rows in the correct order when creating multiple rows', function(done) {
       var testName = '.create() with a list, returning values';
       var users = [];
 

@@ -43,7 +43,7 @@ describe('Semantic Interface', function() {
       });
     });
 
-    it('should take search criteria as values', function(done) {
+    it.skip('should take search criteria as values', function(done) {
      Semantic.User.findOrCreate({ first_name: "findOrCreate()", last_name: 'search criteria' }, function(err, user) {
         assert(user.id);
         assert.equal(user.fullName(), 'findOrCreate() search criteria');
@@ -53,7 +53,7 @@ describe('Semantic Interface', function() {
       });
     });
 
-    it('should accept array of objects', function(done) {
+    it.skip('should accept array of objects', function(done) {
      Semantic.User.findOrCreate([
        { first_name: "findOrCreate()", last_name: 'array' },
        { first_name: 'Mark', last_name: 'Vegetables'}], function(err, users) {

@@ -61,7 +61,7 @@ describe('Association Interface', function() {
         });
       });
 
-      it('should call toJSON on all associated records if available', function(done) {
+      it.skip('should call toJSON on all associated records if available', function(done) {
         Associations.Stadium.find({ name: 'hasManyThrough stadium' })
         .populate('teams')
         .exec(function(err, stadiums) {

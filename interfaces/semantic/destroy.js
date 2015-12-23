@@ -129,7 +129,7 @@ describe('Semantic Interface', function() {
       // TEST METHODS
       ////////////////////////////////////////////////////
 
-      it('should not destroy any records', function(done) {
+      it.skip('should not destroy any records', function(done) {
         Semantic.User.destroy({ id: [] }, function(err, users) {
           assert(!err);
           assert.strictEqual(users.length, 0);

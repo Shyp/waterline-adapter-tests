@@ -9,7 +9,7 @@ var jpath = require('jpath');
 // Config
 
 // The adapters being tested
-var adapters = ['sails-postgresql', 'sails-memory', 'sails-disk', 'sails-mongo', 'sails-mysql', 'sails-redis'];
+var adapters = ['sails-postgresql'];
 
 // Core modules npm Dependencies path
 var coreModulesPaths = {
@@ -52,20 +52,20 @@ function runTests(cb){
   async.eachSeries(adapters, function(adapterName, next){
     var settings = getAdapterSettings(adapterName);
     status[adapterName] = { failed: 0, total: 0, exitCode: 0 };
-    
+
     console.log("\n");
     console.log("\033[0;34m-------------------------------------------------------------------------------------------\033[0m");
     console.log("\033[0;34m                                     %s \033[0m", adapterName);
     console.log("\033[0;34m-------------------------------------------------------------------------------------------\033[0m");
     console.log();
-    
+
     var child = exec('node ./test/integration/runner.js ' + adapterName, { env: process.env });
     child.stdout.on('data', function(data) {
       if(isDot(data)) { status[adapterName].total++; }
       process.stdout.write(data);
     });
     child.stderr.on('data', function(data) {
-      if(isDot(data)) { 
+      if(isDot(data)) {
         status[adapterName].total++;
         status[adapterName].failed++;
       }
@@ -75,19 +75,19 @@ function runTests(cb){
       status[adapterName].exitCode = code;
       var message = code == 0 ? "\033[0;32mpassed\033[0m" : "\033[0;31mfailed\033[0m";
       var wlSequel = getWlSequelVersion(adapterName);
-      resultTable += "| " + padRight(adapterName, 16) 
+      resultTable += "| " + padRight(adapterName, 16)
         + " | " + padLeft(processVersion(npmData.dependencies[adapterName]), 7)
-        + " | " + message 
-        + " | " + padLeft(status[adapterName].failed, 6) 
+        + " | " + message
+        + " | " + padLeft(status[adapterName].failed, 6)
         + " | " + padLeft(status[adapterName].total, 5)
         + " | " + padLeft(wlSequel, 9)
         + " |\n";
-      
+
       console.log('exit code: ' + code);
       if(code != 0 && !settings.returnZeroOnError) { exitCode = exitCode + code; }
       next();
     });
-  }, 
+  },
   cb);
 }
 
@@ -105,8 +105,8 @@ function printCoreModulesVersions(cb){
 }
 
 function getModuleRow(name, module){;
-  return "| "+ padRight(name, 23) + " | " 
-    + padLeft(processVersion(module), 7) 
+  return "| "+ padRight(name, 23) + " | "
+    + padLeft(processVersion(module), 7)
     + " |\n";
 }
 
