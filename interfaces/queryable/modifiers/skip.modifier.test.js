@@ -37,15 +37,6 @@ describe('Queryable Interface', function() {
       });
     });
 
-    it('dynamic finder usage should return the correct amount of records', function(done) {
-      Queryable.User.findByType('skip test', { skip: 3 }, function(err, users) {
-        assert(!err);
-        assert(Array.isArray(users));
-        assert.strictEqual(users.length, 7);
-        done();
-      });
-    });
-
     it('as an option should return correct amount of records', function(done) {
       Queryable.User.find({ where: { type: 'skip test' } }, { skip: 3 }, function(err, users) {
         assert(!err);

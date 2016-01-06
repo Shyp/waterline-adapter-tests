@@ -1,10 +1,14 @@
 /**
  * Module Dependencies
  */
+var fs = require('fs');
+var path = require('path');
 
 var Waterline = require('waterline');
+
 var _ = require('lodash');
 var async = require('async');
+var pg = require('pg');
 
 // Require Fixtures
 var fixtures = {
@@ -17,17 +21,37 @@ var fixtures = {
   ApartmentHasManyFixture: require('./fixtures/hasMany.customPK.fixture'),
   PaymentManyFixture: require('./fixtures/multipleAssociations.fixture').payment,
   CustomerManyFixture: require('./fixtures/multipleAssociations.fixture').customer,
-  StadiumFixture: require('./fixtures/hasManyThrough.stadium.fixture'),
-  TeamFixture: require('./fixtures/hasManyThrough.team.fixture'),
-  VenueFixture: require('./fixtures/hasManyThrough.venue.fixture'),
-  TaxiFixture: require('./fixtures/manyToMany.taxi.fixture'),
-  DriverFixture: require('./fixtures/manyToMany.driver.fixture'),
-  TaxiCustomFixture: require('./fixtures/manyToMany.taxi.customPK.fixture'),
-  DriverCustomFixture: require('./fixtures/manyToMany.driver.customPK.fixture'),
   UserOneFixture: require('./fixtures/oneToOne.fixture').user_resource,
   ProfileOneFixture: require('./fixtures/oneToOne.fixture').profile
 };
 
+var loadTables = function(cb) {
+  var apartmentTable = fs.readFileSync(path.resolve(__dirname, './fixtures/apartmentTable.sql'));
+  var customerTable = fs.readFileSync(path.resolve(__dirname, './fixtures/customerTable.sql'));
+  var customer_manyTable = fs.readFileSync(path.resolve(__dirname, './fixtures/customer_manyTable.sql'));
+  var customerbelongsPKTable = fs.readFileSync(path.resolve(__dirname, './fixtures/customerbelongsPKTable.sql'));
+  var customerbelongsTable = fs.readFileSync(path.resolve(__dirname, './fixtures/customerbelongsTable.sql'));
+  var paymentBelongsTable = fs.readFileSync(path.resolve(__dirname, './fixtures/paymentBelongsTable.sql'));
+  var paymentTable = fs.readFileSync(path.resolve(__dirname, './fixtures/paymentTable.sql'));
+  var payment_manyTable = fs.readFileSync(path.resolve(__dirname, './fixtures/payment_manyTable.sql'));
+  var paymentbelongsPKTable = fs.readFileSync(path.resolve(__dirname, './fixtures/paymentbelongsPKTable.sql'));
+  var profileTable = fs.readFileSync(path.resolve(__dirname, './fixtures/profileTable.sql'));
+  var user_resourceTable = fs.readFileSync(path.resolve(__dirname, './fixtures/user_resourceTable.sql'));
+
+  // hi haters
+  pg.connect(Connections.test, function(err, client, done) {
+    if (err) {
+      cb(err);
+      return;
+    }
+    async.map([apartmentTable, customerTable, customer_manyTable,
+      customerbelongsPKTable, customerbelongsTable, paymentBelongsTable,
+      paymentTable, payment_manyTable, paymentbelongsPKTable, profileTable,
+      user_resourceTable], function(sql, next) {
+        client.query(sql.toString('ascii'), next);
+      }, cb);
+  });
+};
 
 /////////////////////////////////////////////////////
 // TEST SETUP
@@ -37,25 +61,32 @@ var waterline, ontology;
 
 before(function(done) {
 
-  waterline = new Waterline();
+  loadTables(function(err) {
+    if (err) {
+      done(err);
+      return;
+    }
 
-  Object.keys(fixtures).forEach(function(key) {
-    waterline.loadCollection(fixtures[key]);
-  });
+    waterline = new Waterline();
 
-  var connections = { associations: _.clone(Connections.test) };
-
-  waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections }, function(err, _ontology) {
-    if(err) return done(err);
-
-    ontology = _ontology;
-
-    Object.keys(_ontology.collections).forEach(function(key) {
-      var globalName = key.charAt(0).toUpperCase() + key.slice(1);
-      global.Associations[globalName] = _ontology.collections[key];
+    Object.keys(fixtures).forEach(function(key) {
+      waterline.loadCollection(fixtures[key]);
     });
 
-    done();
+    var connections = { associations: _.clone(Connections.test) };
+
+    waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections }, function(err, _ontology) {
+      if(err) return done(err);
+
+      ontology = _ontology;
+
+      Object.keys(_ontology.collections).forEach(function(key) {
+        var globalName = key.charAt(0).toUpperCase() + key.slice(1);
+        global.Associations[globalName] = _ontology.collections[key];
+      });
+
+      done();
+    });
   });
 });
 

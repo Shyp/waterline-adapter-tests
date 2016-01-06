@@ -1,3 +1,9 @@
+// This file just gathers a bunch of info about the environment and then calls
+//
+//    node test/integration/runner.js sails-postgresql
+//
+// (which actually runs the tests) and then gathers more information about what
+// happened and prints it out.
 var exec = require('child_process').exec;
 var async = require('async');
 var npm = require('npm');

@@ -54,30 +54,6 @@ describe('Queryable Interface', function() {
         });
       });
 
-      describe('dynamic attribute', function() {
-
-        /////////////////////////////////////////////////////
-        // TEST METHODS
-        ////////////////////////////////////////////////////
-
-        it('should have [attribute]StartsWith() method', function(done) {
-          var part = 'xxj8xrxh!!!r',
-              testType = part + 'Dynamic StartsWith test';
-
-          Queryable.User.create({ type: testType }, function(err) {
-            if(err) return done(err);
-
-            Queryable.User.typeStartsWith(part, function(err, users) {
-              assert(!err);
-              assert(Array.isArray(users));
-              assert.equal(users.length, 1);
-              assert.equal(users[0].type, testType);
-              done();
-            });
-          });
-        });
-      });
-
     });
   });
 });

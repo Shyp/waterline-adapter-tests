@@ -53,30 +53,6 @@ describe('Queryable Interface', function() {
         });
       });
 
-      describe('dynamic attribute', function() {
-
-        /////////////////////////////////////////////////////
-        // TEST METHODS
-        ////////////////////////////////////////////////////
-
-        it('should have [attribute]EndsWith() method', function(done) {
-          var part = 'xxj8xrxh!!!r',
-              testType = 'Dynamic EndsWith test' + part;
-
-          Queryable.User.create({ type: testType }, function(err) {
-            if(err) return done(err);
-
-            Queryable.User.typeEndsWith(part, function(err, users) {
-              assert(!err);
-              assert(Array.isArray(users));
-              assert.equal(users.length, 1);
-              assert.equal(users[0].type, testType);
-              done();
-            });
-          });
-        });
-      });
-
     });
   });
 });

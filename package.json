@@ -8,13 +8,14 @@
     "bluebird": "~2.9.0",
     "lodash": "^3.10",
     "mocha": "^2.3.4",
+    "pg": "4.2.0",
+    "sails-postgresql": "git+https://github.com/Shyp/sails-postgresql.git#shyp-master-0.10.15",
     "should": "^7.0",
-    "waterline": "git+https://github.com/Shyp/waterline.git#shyp-master-0.10.13"
+    "waterline": "git+https://github.com/Shyp/waterline.git#v1.3.0"
   },
   "devDependencies": {
     "jpath": "^0.0.20",
-    "npm": "^2.7.4",
-    "sails-postgresql": "git+https://github.com/Shyp/sails-postgresql.git#shyp-master-0.10.15"
+    "npm": "^2.14.15"
   },
   "keywords": [
     "orm",

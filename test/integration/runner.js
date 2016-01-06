@@ -36,8 +36,6 @@ catch (e) {
 
 
 
-
-
 console.info('Testing `' + package.name + '`, a Sails adapter.');
 console.info('Running `waterline-adapter-tests` against ' + interfaces.length + ' interfaces...');
 console.info('( ' + interfaces.join(', ') + ' )');
@@ -80,7 +78,7 @@ new TestRunner({
   // reference: https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
   mocha: {
     reporter: customDotReporter,
-    bail: true,
+    bail: false,
   },
 
   mochaChainableMethods: {},

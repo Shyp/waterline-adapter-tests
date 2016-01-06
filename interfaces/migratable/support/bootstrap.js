@@ -1,9 +1,13 @@
 /**
  * Module Dependencies
  */
+var fs = require('fs');
+var path = require('path');
 
-var bootstrapFn = require('./bootstrapFn'),
-    async = require('async');
+var async = require('async');
+var pg = require('pg');
+
+var bootstrapFn = require('./bootstrapFn');
 
 /////////////////////////////////////////////////////
 // TEST SETUP
@@ -11,22 +15,61 @@ var bootstrapFn = require('./bootstrapFn'),
 
 var waterline, ontology;
 
+var loadTables = function(cb) {
+  var userTable = fs.readFileSync(path.resolve(__dirname, './fixtures/userTable.sql'));
+  var documentTable = fs.readFileSync(path.resolve(__dirname, './fixtures/documentTable.sql'));
+  var dropTable = fs.readFileSync(path.resolve(__dirname, './fixtures/dropTable.sql'));
+
+  pg.connect(Connections.test, function(err, client, done) {
+    if (err) {
+      cb(err);
+      return;
+    }
+    client.query(userTable.toString('ascii'), function(err, result) {
+      if (err) {
+        cb(err);
+        return;
+      }
+      client.query(dropTable.toString('ascii'), function(err, result) {
+        if (err) {
+          cb(err);
+          return;
+        }
+        client.query(documentTable.toString('ascii'), function(err, result) {
+          cb(err);
+        });
+      });
+    });
+  });
+
+};
+
 before(function(done) {
 
-  bootstrapFn(function(err, obj) {
+  loadTables(function(err) {
+    if (err) {
+      done(err);
+      return;
+    }
+    bootstrapFn(function(err, obj) {
+      if (err) {
+        done(err);
+        return;
+      }
 
-    ontology = obj.ontology;
-    waterline = obj.waterline;
+      ontology = obj.ontology;
+      waterline = obj.waterline;
 
-    Object.keys(ontology.collections).forEach(function(key) {
-      var globalName = key.charAt(0).toUpperCase() + key.slice(1);
-      global.Migratable[globalName] = ontology.collections[key];
+      Object.keys(ontology.collections).forEach(function(key) {
+        var globalName = key.charAt(0).toUpperCase() + key.slice(1);
+        global.Migratable[globalName] = ontology.collections[key];
+      });
+
+      // Store the Waterline object as a global so it can be used in the tests
+      global.Migratable.waterline = waterline;
+
+      done();
     });
-
-    // Store the Waterline object as a global so it can be used in the tests
-    global.Migratable.waterline = waterline;
-
-    done();
   });
 });
 

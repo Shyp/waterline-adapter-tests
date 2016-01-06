@@ -31,21 +31,11 @@ describe('Queryable Interface', function() {
     // TEST METHODS
     ////////////////////////////////////////////////////
 
-    it('should accurately count records', function(done) {
+    it('should return an error when counting', function(done) {
       Queryable.User.count({ type: 'count' }, function(err, count) {
-        assert(!err);
-        assert.strictEqual(count, 10);
+        assert.strictEqual(err.message, 'count() is unsupported');
         done();
       });
     });
-
-    it('should work with dynamic finders', function(done) {
-      Queryable.User.countByType('count', function(err, count) {
-        assert(!err);
-        assert.strictEqual(count, 10);
-        done();
-      });
-    });
-
   });
 });

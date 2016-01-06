@@ -2,10 +2,15 @@
  * Module Dependencies
  */
 
-var Waterline = require('waterline');
+var assert = require('assert');
+var fs = require('fs');
+var path = require('path');
+
 var _ = require('lodash');
 var async = require('async');
-var assert = require('assert');
+var pg = require('pg');
+
+var Waterline = require('waterline');
 
 // Require Fixtures
 var fixtures = {
@@ -13,36 +18,64 @@ var fixtures = {
   ThingFixture: require('./fixtures/validations.fixture')
 };
 
-
 /////////////////////////////////////////////////////
 // TEST SETUP
 ////////////////////////////////////////////////////
 
 var waterline, ontology;
 
-before(function(done) {
+var loadTables = function(cb) {
+  var userTable = fs.readFileSync(path.resolve(__dirname, './fixtures/userTable.sql'));
+  var thingTable = fs.readFileSync(path.resolve(__dirname, './fixtures/thingTable.sql'));
 
-  waterline = new Waterline();
-
-  Object.keys(fixtures).forEach(function(key) {
-    waterline.loadCollection(fixtures[key]);
+  pg.connect(Connections.test, function(err, client, done) {
+    if (err) {
+      cb(err);
+      return;
+    }
+    client.query(userTable.toString('ascii'), function(err, result) {
+      if (err) {
+        cb(err);
+        return;
+      }
+      client.query(thingTable.toString('ascii'), function(err, result) {
+        cb(err);
+      });
+    });
   });
 
-  var connections = { semantic: _.clone(Connections.test) };
-  
-  var defaults = { migrate: 'alter' };
+};
 
-  waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections, defaults: defaults }, function(err, _ontology) {
-    if(err) return done(err);
+before(function(done) {
 
-    ontology = _ontology;
+  loadTables(function(err) {
+    if (err) {
+      done(err);
+      return;
+    }
 
-    Object.keys(_ontology.collections).forEach(function(key) {
-      var globalName = key.charAt(0).toUpperCase() + key.slice(1);
-      global.Semantic[globalName] = _ontology.collections[key];
+    waterline = new Waterline();
+
+    Object.keys(fixtures).forEach(function(key) {
+      waterline.loadCollection(fixtures[key]);
     });
 
-    done();
+    var connections = { semantic: _.clone(Connections.test) };
+
+    var defaults = { migrate: 'safe' };
+
+    waterline.initialize({ adapters: { wl_tests: Adapter }, connections: connections, defaults: defaults }, function(err, _ontology) {
+      if(err) return done(err);
+
+      ontology = _ontology;
+
+      Object.keys(_ontology.collections).forEach(function(key) {
+        var globalName = key.charAt(0).toUpperCase() + key.slice(1);
+        global.Semantic[globalName] = _ontology.collections[key];
+      });
+
+      done();
+    });
   });
 });
 

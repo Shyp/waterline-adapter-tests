@@ -33,9 +33,9 @@ describe('Migratable Interface', function() {
 
             var ontology = obj.ontology;
 
-            ontology.collections.drop.count().exec(function(err, numOfPirates) {
+            ontology.collections.drop.find().exec(function(err, pirates) {
               assert(!err);
-              assert.strictEqual(numOfPirates, 0);
+              assert.deepEqual(pirates, []);
               done();
             });
           });
