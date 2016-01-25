@@ -8,9 +8,9 @@
     "bluebird": "~2.9.0",
     "lodash": "^3.10",
     "mocha": "^2.3.4",
-    "pg": "4.2.0",
-    "sails-postgresql": "git+https://github.com/Shyp/sails-postgresql.git#shyp-master-0.10.15",
-    "should": "^7.0",
+    "pg": "4.3.0",
+    "sails-postgresql": "git+https://github.com/Shyp/sails-postgresql.git#v1.0.0",
+    "should": "^8.0",
     "waterline": "git+https://github.com/Shyp/waterline.git#v1.3.0"
   },
   "devDependencies": {
@@ -23,12 +23,10 @@
     "waterline",
     "adapters",
     "sails",
-    "mysql",
-    "postgresql",
-    "mongo"
+    "postgresql"
   ],
-  "repository": "git://github.com/balderdashy/waterline-adapter-tests.git",
-  "homepage": "https://github.com/balderdashy/waterline-adapter-tests",
+  "repository": "git://github.com/Shyp/waterline-adapter-tests.git",
+  "homepage": "https://github.com/Shyp/waterline-adapter-tests",
   "main": "./lib/index.js",
   "scripts": {
     "test": "node test/integration/runnerDispatcher.js",
