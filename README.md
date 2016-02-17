@@ -1,8 +1,5 @@
 Waterline Adapter Tests
 ==========================
-[![Build Status](https://travis-ci.org/balderdashy/waterline-adapter-tests.svg?branch=master)](https://travis-ci.org/balderdashy/waterline-adapter-tests)
-[![npm version](https://badge.fury.io/js/waterline-adapter-tests.svg)](http://badge.fury.io/js/waterline-adapter-tests)
-[![Dependency Status](https://david-dm.org/balderdashy/waterline-adapter-tests.svg)](https://david-dm.org/balderdashy/waterline-adapter-tests)
 
 A set of integration tests that can be included in your Waterline Adapter module and used to test
 your adapter against the current Waterline API.
@@ -58,10 +55,10 @@ $ node runner.js
 
 ## Running Tests in a Vagrant VM
 
-Since it is not necessarily desirable to install all the databases on the local host 
-where this package is tested a [Vagrant](https://www.vagrantup.com) configuration for 
+Since it is not necessarily desirable to install all the databases on the local host
+where this package is tested a [Vagrant](https://www.vagrantup.com) configuration for
 a fully configured virtual host is provided. To run the tests using this virtual host
-follow [these steps](.puppet/README.md). 
+follow [these steps](.puppet/README.md).
 
 Using Vagrant is entirely optional. If you prefer to just run the test on your host
 directly just ensure the various databases being tested are installed.
