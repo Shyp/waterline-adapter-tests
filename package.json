@@ -1,7 +1,7 @@
 {
   "name": "waterline-adapter-tests",
   "description": "Integration tests for waterline adapters",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "author": "Shyp Engineering <engineering@shyp.com>",
   "dependencies": {
     "async": "^1.4",
