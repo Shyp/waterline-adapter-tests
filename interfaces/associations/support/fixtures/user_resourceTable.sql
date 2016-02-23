@@ -1,4 +1,4 @@
-CREATE TABLE "user_resourceTable" (
+CREATE TABLE "user_resource" (
   "name" TEXT,
   "quantity" INT,
   "id" SERIAL UNIQUE,

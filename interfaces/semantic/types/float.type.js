@@ -11,10 +11,10 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should store proper float value', function(done) {
-        Semantic.User.create({ percent: 0.001 }, function(err, createdRecord) {
+        Semantic.User1.create({ percent: 0.001 }, function(err, createdRecord) {
           assert.ifError(err);
           assert.strictEqual(createdRecord.percent, 0.001);
-          Semantic.User.findOne({id: createdRecord.id}, function(err, record) {
+          Semantic.User1.findOne({id: createdRecord.id}, function(err, record) {
             assert.ifError(err);
             assert.strictEqual(record.percent, 0.001);
             done();

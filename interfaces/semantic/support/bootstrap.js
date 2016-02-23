@@ -54,6 +54,7 @@ before(function(done) {
       return;
     }
 
+
     waterline = new Waterline();
 
     Object.keys(fixtures).forEach(function(key) {
@@ -85,8 +86,7 @@ after(function(done) {
     if(!Adapter.hasOwnProperty('drop')) return next();
 
     ontology.collections[item].drop(function(err) {
-      if(err) return next(err);
-      next();
+      next(err);
     });
   }
 

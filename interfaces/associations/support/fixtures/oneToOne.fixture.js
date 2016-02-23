@@ -6,7 +6,7 @@ var Waterline = require('waterline');
 
 module.exports.user_resource = Waterline.Collection.extend({
 
-  tableName: 'user_resourceTable',
+  tableName: 'user_resource',
   identity: 'user_resource',
   connection: 'associations',
 

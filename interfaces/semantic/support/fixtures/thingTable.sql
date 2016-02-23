@@ -1,4 +1,4 @@
-CREATE TABLE "thingTable" (
+CREATE TABLE "thing" (
     "name" TEXT,
     "age" INT,
     "description" TEXT,

@@ -11,10 +11,10 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should store proper integer', function(done) {
-        Semantic.User.create({ age: 27 }, function (err, createdRecord) {
+        Semantic.User1.create({ age: 27 }, function (err, createdRecord) {
           assert.ifError(err);
           assert.strictEqual(createdRecord.age, 27);
-          Semantic.User.findOne({id: createdRecord.id}, function (err, record) {
+          Semantic.User1.findOne({id: createdRecord.id}, function (err, record) {
             assert.ifError(err);
             assert.strictEqual(record.age, 27);
             done();

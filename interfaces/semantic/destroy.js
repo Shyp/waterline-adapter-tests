@@ -12,7 +12,7 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       before(function(done) {
-        Semantic.User.create({ first_name: 'Destroy', last_name: 'Test' }, function(err) {
+        Semantic.User1.create({ first_name: 'Destroy', last_name: 'Test' }, function(err) {
           if(err) return done(err);
           done();
         });
@@ -23,7 +23,7 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should destroy a record', function(done) {
-        Semantic.User.destroy({ first_name: 'Destroy' }, function(err, records) {
+        Semantic.User1.destroy({ first_name: 'Destroy' }, function(err, records) {
           assert.ifError(err);
           assert(Array.isArray(records));
           assert.strictEqual(records.length, 1);
@@ -34,7 +34,7 @@ describe('Semantic Interface', function() {
       });
 
       it('should return an empty array when searched for', function(done) {
-        Semantic.User.find({ first_name: 'Destroy' }, function(err, users) {
+        Semantic.User1.find({ first_name: 'Destroy' }, function(err, users) {
           assert.strictEqual(users.length, 0);
           done();
         });
@@ -52,7 +52,7 @@ describe('Semantic Interface', function() {
 
       // Create a user to test destroy on
       before(function(done) {
-        Semantic.User.create({ first_name: 'Destroy', last_name: 'Test' }, function(err, record) {
+        Semantic.User1.create({ first_name: 'Destroy', last_name: 'Test' }, function(err, record) {
           if(err) return done(err);
           user = record;
           done();
@@ -64,14 +64,14 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should destroy a record', function(done) {
-        Semantic.User.destroy(user.id, function(err, status) {
+        Semantic.User1.destroy(user.id, function(err, status) {
           assert.ifError(err);
           done();
         });
       });
 
       it('should return an empty array when searched for', function(done) {
-        Semantic.User.find({ first_name: 'Destroy' }, function(err, users) {
+        Semantic.User1.find({ first_name: 'Destroy' }, function(err, users) {
           assert.strictEqual(users.length, 0);
           done();
         });
@@ -85,7 +85,7 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       beforeEach(function(done) {
-        Semantic.User.createEach([
+        Semantic.User1.createEach([
           { first_name: 'dummy_test' },
           { first_name: 'dummy_test' },
           { first_name: 'dummy_test' }
@@ -97,14 +97,14 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should destroy all the records', function(done) {
-        Semantic.User.destroy(function(err, users) {
+        Semantic.User1.destroy(function(err, users) {
           assert.ifError(err);
           done();
         });
       });
 
       it('should return an empty array when searched for', function(done) {
-        Semantic.User.find({ first_name: 'Destroy' }, function(err, users) {
+        Semantic.User1.find({ first_name: 'Destroy' }, function(err, users) {
           assert.strictEqual(users.length, 0);
           done();
         });
@@ -118,7 +118,7 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       beforeEach(function(done) {
-        Semantic.User.createEach([
+        Semantic.User1.createEach([
           { first_name: 'dummy_test_in' },
           { first_name: 'dummy_test_in' },
           { first_name: 'dummy_test_in' }
@@ -130,11 +130,11 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       it.skip('should not destroy any records', function(done) {
-        Semantic.User.destroy({ id: [] }, function(err, users) {
+        Semantic.User1.destroy({ id: [] }, function(err, users) {
           assert.ifError(err);
           assert.strictEqual(users.length, 0);
 
-          Semantic.User.find({ first_name: 'dummy_test_in' }, function(err, users) {
+          Semantic.User1.find({ first_name: 'dummy_test_in' }, function(err, users) {
             assert.ifError(err);
             assert.strictEqual(users.length, 3);
             done();

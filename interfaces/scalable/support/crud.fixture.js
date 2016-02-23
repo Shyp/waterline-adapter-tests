@@ -16,7 +16,7 @@ module.exports = Waterline.Collection.extend({
     email: {
       type: 'string',
       columnName: 'emailAddress'
-    }, 
+    },
     title: 'string',
     phone: 'string',
     type: 'string',
@@ -37,5 +37,4 @@ module.exports = Waterline.Collection.extend({
       return this.first_name + ' ' + this.last_name;
     }
   }
-
 });

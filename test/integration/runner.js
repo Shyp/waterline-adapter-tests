@@ -77,8 +77,9 @@ new TestRunner({
   // Mocha options
   // reference: https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically
   mocha: {
-    reporter: customDotReporter,
-    bail: false,
+    //reporter: customDotReporter,
+    bail: process.env.BAIL === 'true',
+    verbose: process.env.VERBOSE === 'true',
   },
 
   mochaChainableMethods: {},

@@ -1,4 +1,4 @@
-CREATE TABLE "userTable" (
+CREATE TABLE "user1" (
     "first_name" TEXT,
     "last_name" TEXT,
     "avatar" BYTEA,

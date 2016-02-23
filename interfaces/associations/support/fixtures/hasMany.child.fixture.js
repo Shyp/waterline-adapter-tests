@@ -6,7 +6,7 @@ var Waterline = require('waterline');
 
 module.exports = Waterline.Collection.extend({
 
-  tableName: 'paymentTable',
+  tableName: 'payment',
   identity: 'payment',
   connection: 'associations',
 

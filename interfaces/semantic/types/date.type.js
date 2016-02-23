@@ -13,11 +13,11 @@ describe('Semantic Interface', function() {
       it('should store proper date value', function(done) {
         var date = new Date();
         var origDate = Date.parse(date);
-        Semantic.User.create({ dob: date }, function(err, createdRecord) {
+        Semantic.User1.create({ dob: date }, function(err, createdRecord) {
           assert.ifError(err);
           var createdDate = Date.parse(new Date(createdRecord.dob));
           assert.strictEqual(origDate, createdDate);
-          Semantic.User.findOne({id: createdRecord.id}, function (err, record) {
+          Semantic.User1.findOne({id: createdRecord.id}, function (err, record) {
             assert.ifError(err);
             // Convert both dates to unix timestamps
             var resultDate = Date.parse(new Date(record.dob));
