@@ -20,7 +20,7 @@ var adapters = ['sails-postgresql'];
 // Core modules npm Dependencies path
 var coreModulesPaths = {
   "waterline":               ".dependencies.waterline",
-  "- anchor":                ".dependencies.waterline.dependencies.anchor",
+  "- lusitania":             ".dependencies.waterline.dependencies.lusitania",
   "- waterline-schema":      ".dependencies.waterline.dependencies.waterline-schema",
   "waterline-adapter-tests": "."
 };

@@ -11,7 +11,7 @@
     "pg": "git://github.com/Shyp/node-postgres#timeout",
     "sails-postgresql": "git+https://github.com/Shyp/sails-postgresql.git#v1.2.0",
     "should": "8",
-    "waterline": "git+https://github.com/Shyp/waterline.git#v1.3.0"
+    "waterline": "git+https://github.com/Shyp/waterline.git#v3.1.0"
   },
   "devDependencies": {
     "jpath": "^0.0.20",
