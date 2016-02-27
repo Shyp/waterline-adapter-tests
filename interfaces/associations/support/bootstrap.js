@@ -8,7 +8,7 @@ var Waterline = require('waterline');
 
 var _ = require('lodash');
 var async = require('async');
-var pg = require('pg');
+var pg = require('pg').native;
 
 // Require Fixtures
 var fixtures = {
