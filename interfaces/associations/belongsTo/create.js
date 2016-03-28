@@ -13,7 +13,7 @@ describe('Association Interface', function() {
       var customerId;
 
       before(function(done) {
-        Associations.Customer.create({ name: 'belongsTo add' }).exec(function(err, cust) {
+        Associations.Customertable.create({ name: 'belongsTo add' }).exec(function(err, cust) {
           if(err) return done(err);
           customerId = cust.id;
           done();
@@ -25,7 +25,7 @@ describe('Association Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should create a foreign key value when passed an association key', function(done) {
-        Associations.Payment.create({ amount: 1, a_customer: customerId }).exec(function(err, payment) {
+        Associations.Paymenttable.create({ amount: 1, a_customer: customerId }).exec(function(err, payment) {
           assert.ifError(err);
           assert.equal(payment.a_customer.toString(), customerId.toString());
           done();

@@ -12,7 +12,7 @@ describe('Association Interface', function() {
     var customerRecord;
 
     before(function(done) {
-      Associations.Customer.create({ name: 'hasMany findOne' }, function(err, customer) {
+      Associations.Customertable.create({ name: 'hasMany findOne' }, function(err, customer) {
         if(err) return done(err);
 
         customerRecord = customer;
@@ -23,7 +23,7 @@ describe('Association Interface', function() {
           payments.push({ amount: i, a_customer: customer.id });
         }
 
-        Associations.Payment.createEach(payments, function(err) {
+        Associations.Paymenttable.createEach(payments, function(err) {
           if(err) return done(err);
           done();
         });
@@ -37,7 +37,7 @@ describe('Association Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should return payments when the populate criteria is added', function(done) {
-       Associations. Customer.findOne({ id: customerRecord.id })
+       Associations.Customertable.findOne({ id: customerRecord.id })
         .populate('payments')
         .exec(function(err, customer) {
           assert.ifError(err);
@@ -49,7 +49,7 @@ describe('Association Interface', function() {
       });
 
       it('should add a flag to not serialize association object when the populate is not added', function(done) {
-        Associations.Customer.findOne({ id: customerRecord.id })
+        Associations.Customertable.findOne({ id: customerRecord.id })
         .exec(function(err, customer) {
           assert.ifError(err);
 
@@ -61,7 +61,7 @@ describe('Association Interface', function() {
       });
 
       it('should call toJSON on all associated records if available', function(done) {
-        Associations.Customer.findOne({ id: customerRecord.id })
+        Associations.Customertable.findOne({ id: customerRecord.id })
         .populate('payments')
         .exec(function(err, customer) {
           assert.ifError(err);

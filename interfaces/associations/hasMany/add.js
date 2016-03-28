@@ -15,11 +15,11 @@ describe('Association Interface', function() {
         var customer;
 
         before(function(done) {
-          Associations.Customer.create({ name: 'hasMany add' }, function(err, model) {
+          Associations.Customertable.create({ name: 'hasMany add' }, function(err, model) {
             if(err) return done(err);
 
             customer = model;
-            Associations.Payment.create({ amount: 1, a_customer: customer.id }, done);
+            Associations.Paymenttable.create({ amount: 1, a_customer: customer.id }, done);
           });
         });
 
@@ -33,7 +33,7 @@ describe('Association Interface', function() {
             assert.ifError(err);
 
             // Look up the customer again to be sure the payment was added
-            Associations.Customer.findOne(customer.id)
+            Associations.Customertable.findOne(customer.id)
             .populate('payments')
             .exec(function(err, model) {
               assert.ifError(err);
@@ -61,11 +61,11 @@ describe('Association Interface', function() {
             { name: 'hasMany add 2' }
           ];
 
-          Associations.Customer.createEach(records, function(err, models) {
+          Associations.Customertable.createEach(records, function(err, models) {
             if(err) return done(err);
 
             customer = models[0];
-            Associations.Payment.create({ amount: 1, a_customer: models[1].id }, function(err, paymentModel) {
+            Associations.Paymenttable.create({ amount: 1, a_customer: models[1].id }, function(err, paymentModel) {
               if(err) return done(err);
 
               payment = paymentModel;
@@ -84,7 +84,7 @@ describe('Association Interface', function() {
             assert.ifError(err);
 
             // Look up the customer again to be sure the payment was added
-            Associations.Customer.findOne(customer.id)
+            Associations.Customertable.findOne(customer.id)
             .populate('payments')
             .exec(function(err, data) {
               assert.ifError(err);

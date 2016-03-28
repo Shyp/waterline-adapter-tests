@@ -24,11 +24,11 @@ describe('Association Interface', function() {
               ]
             };
 
-            Associations.Customer.create(data).exec(function(err, values) {
+            Associations.Customertable.create(data).exec(function(err, values) {
               if(err) return done(err);
 
               // Look up the customer again to be sure the payments were added
-              Associations.Customer.findOne(values.id)
+              Associations.Customertable.findOne(values.id)
               .populate('payments', { sort: 'amount ASC' })
               .exec(function(err, model) {
                 if(err) return done(err);
@@ -45,7 +45,7 @@ describe('Association Interface', function() {
           var pmtId;
 
           before(function(done) {
-            Associations.Payment.create({ amount: 1 }).exec(function(err, payment) {
+            Associations.Paymenttable.create({ amount: 1 }).exec(function(err, payment) {
               if(err) return done(err);
               pmtId = payment.id;
               done();
@@ -66,11 +66,11 @@ describe('Association Interface', function() {
               ]
             };
 
-            Associations.Customer.create(data).exec(function(err, values) {
+            Associations.Customertable.create(data).exec(function(err, values) {
               assert.ifError(err);
 
               // Look up the customer again to be sure the payments were added
-              Associations.Customer.findOne(values.id)
+              Associations.Customertable.findOne(values.id)
               .populate('payments', { sort: 'amount ASC' })
               .exec(function(err, model) {
                 assert.ifError(err);

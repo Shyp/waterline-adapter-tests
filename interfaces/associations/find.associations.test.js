@@ -18,7 +18,7 @@ describe('Association Interface', function() {
 
     before(function(done) {
 
-      Associations.Customer.createEach([{}, {}], function(err, customers) {
+      Associations.Customertable.createEach([{}, {}], function(err, customers) {
         if(err) return done(err);
 
         // cache customers
@@ -30,7 +30,7 @@ describe('Association Interface', function() {
         for(i=0; i<2; i++) payments.push({ amount: i, a_customer: customers[0].id });
         for(i=0; i<2; i++) payments.push({ amount: i, a_customer: customers[1].id });
 
-        Associations.Payment.createEach(payments, function(err) {
+        Associations.Paymenttable.createEach(payments, function(err) {
           if(err) return done(err);
           done();
         });
@@ -44,13 +44,13 @@ describe('Association Interface', function() {
 
     it('should group associations under the parent key', function(done) {
 
-      // Associations.Customer.find({ id: [Customers[0].id, Customers[1].id]})
+      // Associations.Customertable.find({ id: [Customers[0].id, Customers[1].id]})
       // .exec()
-      // Associations.Payment.find();
+      // Associations.Paymenttable.find();
 
 
 
-      Associations.Customer.find({ id: [Customers[0].id, Customers[1].id]})
+      Associations.Customertable.find({ id: [Customers[0].id, Customers[1].id]})
       .populate('payments', { sort: { amount: 1 }})
       .sort('id asc')
       .exec(function(err, customers) {

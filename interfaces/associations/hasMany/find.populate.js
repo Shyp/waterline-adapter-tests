@@ -20,10 +20,10 @@ describe('Association Interface', function() {
         { name: 'hasMany find pop' }
       ];
 
-      Associations.Customer.createEach(customerRecords, function(err, customers) {
+      Associations.Customertable.createEach(customerRecords, function(err, customers) {
         if(err) return done(err);
 
-        Associations.Customer.find({ name: 'hasMany find pop'})
+        Associations.Customertable.find({ name: 'hasMany find pop'})
         .sort('id asc')
         .exec(function(err, customers) {
           if(err) return done(err);
@@ -35,7 +35,7 @@ describe('Association Interface', function() {
             if(i >= 4) payments.push({ amount: i, a_customer: customers[1].id });
           }
 
-          Associations.Payment.createEach(payments, function(err, payments) {
+          Associations.Paymenttable.createEach(payments, function(err, payments) {
             if(err) return done(err);
             done();
           });
@@ -50,7 +50,7 @@ describe('Association Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should return payments when the populate criteria is added', function(done) {
-        Associations.Customer.find({ name: 'hasMany find pop' })
+        Associations.Customertable.find({ name: 'hasMany find pop' })
         .populate('payments')
         .exec(function(err, customers) {
           assert(!err, err);
@@ -70,7 +70,7 @@ describe('Association Interface', function() {
 
       it('should return all the populated records when a limit clause is used', function(done) {
 
-        Associations.Customer.find({ name: 'hasMany find pop' })
+        Associations.Customertable.find({ name: 'hasMany find pop' })
         .populate('payments', {sort: 'amount asc'})
         .limit(1)
         .sort('id asc')
@@ -92,7 +92,7 @@ describe('Association Interface', function() {
       ////////////////////////////////////////////////////////////////////////////////////
 
       // e.g.
-      // Associations.Customer.find({ name: 'hasMany find' })
+      // Associations.Customertable.find({ name: 'hasMany find' })
       //   .populate('payments', {
       //     limit: 2,
       //     sort: {amount: -1}
@@ -120,7 +120,7 @@ describe('Association Interface', function() {
       ////////////////////////////////////////////////////////////////////////////////////
 
       it('should return all the populated records when a skip clause is used', function(done) {
-        Associations.Customer.find({ name: 'hasMany find pop' })
+        Associations.Customertable.find({ name: 'hasMany find pop' })
         .populate('payments', { sort: { amount: 1 } })
         .skip(1)
         .sort('id asc')
@@ -141,7 +141,7 @@ describe('Association Interface', function() {
       });
 
       it('should add a flag to not serialize association object when the populate is not added', function(done) {
-        Associations.Customer.find({ name: 'hasMany find pop' })
+        Associations.Customertable.find({ name: 'hasMany find pop' })
         .exec(function(err, customers) {
           assert.ifError(err);
 
@@ -153,7 +153,7 @@ describe('Association Interface', function() {
       });
 
       it('should call toJSON on all associated records if available', function(done) {
-        Associations.Customer.find({ name: 'hasMany find pop' })
+        Associations.Customertable.find({ name: 'hasMany find pop' })
         .populate('payments')
         .exec(function(err, customers) {
           assert.ifError(err);

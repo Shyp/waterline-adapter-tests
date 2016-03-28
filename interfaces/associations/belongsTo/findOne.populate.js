@@ -12,10 +12,10 @@ describe('Association Interface', function() {
     var customerRecord, paymentRecord;
 
     before(function(done) {
-      Associations.Customer.create({ name: 'foobar' }, function(err, customer) {
+      Associations.Customertable.create({ name: 'foobar' }, function(err, customer) {
         if(err) return done(err);
 
-        Associations.Payment.create({ amount: 1, a_customer: customer.id }, function(err, payment) {
+        Associations.Paymenttable.create({ amount: 1, a_customer: customer.id }, function(err, payment) {
           if(err) return done(err);
 
           // Cache customer and payment
@@ -34,7 +34,7 @@ describe('Association Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should return customer when the populate criteria is added', function(done) {
-        Associations.Payment.findOne({ id: paymentRecord.id })
+        Associations.Paymenttable.findOne({ id: paymentRecord.id })
         .populate('a_customer')
         .exec(function(err, payment) {
           assert.ifError(err);
@@ -48,7 +48,7 @@ describe('Association Interface', function() {
       });
 
       it('should not return a customer object when the populate is not added', function(done) {
-        Associations.Payment.findOne({ id: paymentRecord.id })
+        Associations.Paymenttable.findOne({ id: paymentRecord.id })
         .exec(function(err, payment) {
           assert.ifError(err);
 
@@ -59,7 +59,7 @@ describe('Association Interface', function() {
       });
 
       it('should call toJSON on associated record', function(done) {
-        Associations.Payment.findOne({ id: paymentRecord.id })
+        Associations.Paymenttable.findOne({ id: paymentRecord.id })
         .populate('a_customer')
         .exec(function(err, payment) {
           assert.ifError(err);

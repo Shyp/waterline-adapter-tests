@@ -18,7 +18,7 @@ describe('Semantic Interface', function() {
         users.push({first_name: 'find_user' + i, type: 'find test', age: i*10 });  // include an integer field
       }
 
-      Semantic.User.createEach(users, function(err, users) {
+      Semantic.Usertable.createEach(users, function(err, users) {
         if(err) return done(err);
         done();
       });
@@ -29,7 +29,7 @@ describe('Semantic Interface', function() {
     ////////////////////////////////////////////////////
 
     it('should return 10 records', function(done) {
-      Semantic.User.find({ type: 'find test' }, function(err, users) {
+      Semantic.Usertable.find({ type: 'find test' }, function(err, users) {
         assert.ifError(err);
         assert(Array.isArray(users));
         assert.strictEqual(users.length, 10);
@@ -38,7 +38,7 @@ describe('Semantic Interface', function() {
     });
 
     it('should return 1 record when searching for a specific record (integer test) with find', function(done) {
-      Semantic.User.find({ age: 10 }, function(err, users) {
+      Semantic.Usertable.find({ age: 10 }, function(err, users) {
         assert.ifError(err);
         assert(Array.isArray(users));
         assert.strictEqual(users.length, 1);
@@ -47,7 +47,7 @@ describe('Semantic Interface', function() {
     });
 
     it('should parse multi-level criteria', function(done) {
-      Semantic.User.find({
+      Semantic.Usertable.find({
         age: {
           lessThanOrEqual: 49 // should return half the records - from 0 to 40
         }
@@ -60,7 +60,7 @@ describe('Semantic Interface', function() {
     });
 
     it('should return a model instance', function(done) {
-      Semantic.User.find({ type: 'find test' }, function(err, users) {
+      Semantic.Usertable.find({ type: 'find test' }, function(err, users) {
         assert(!err, err);
         assert(users[0].id);
         assert.equal(typeof users[0].fullName, 'function');
@@ -71,7 +71,7 @@ describe('Semantic Interface', function() {
     });
 
     it('should work with no criteria passed in', function(done) {
-      Semantic.User.find(function(err, users) {
+      Semantic.Usertable.find(function(err, users) {
         assert.ifError(err);
         assert(Array.isArray(users));
         done();

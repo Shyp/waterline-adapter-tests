@@ -1,4 +1,4 @@
-CREATE TABLE "payment_manyTable" (
+CREATE TABLE payment_many (
   "amount" INT,
   "type" TEXT,
   "id" SERIAL UNIQUE,

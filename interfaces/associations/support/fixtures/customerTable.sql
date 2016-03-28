@@ -1,4 +1,4 @@
-CREATE TABLE "customerTable" (
+CREATE TABLE customertable (
   "name" TEXT,
   "title" TEXT,
   "capital" INT,

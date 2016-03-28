@@ -12,10 +12,10 @@ describe('Association Interface', function() {
     var customerRecord, paymentRecord;
 
     before(function(done) {
-      Associations.Customer.create({ name: 'foobar' }, function(err, customer) {
+      Associations.Customertable.create({ name: 'foobar' }, function(err, customer) {
         if(err) return done(err);
 
-        Associations.Payment.create({ amount: 1, customer: customer.id }, function(err, payment) {
+        Associations.Paymenttable.create({ amount: 1, customer: customer.id }, function(err, payment) {
           if(err) return done(err);
 
           // Cache customer and payment
@@ -34,7 +34,7 @@ describe('Association Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should return customer when the dynamic finder method is used for findOne', function(done) {
-        Associations.Payment.findOneByA_customer(customerRecord.id)
+        Associations.Paymenttable.findOneByA_customer(customerRecord.id)
         .exec(function(err, payment) {
           assert.ifError(err);
 
@@ -47,7 +47,7 @@ describe('Association Interface', function() {
       });
 
       it('should return customer when the dynamic finder method is used for find', function(done) {
-        Associations.Payment.findByA_customer(customerRecord.id)
+        Associations.Paymenttable.findByA_customer(customerRecord.id)
         .exec(function(err, payments) {
           assert.ifError(err);
 

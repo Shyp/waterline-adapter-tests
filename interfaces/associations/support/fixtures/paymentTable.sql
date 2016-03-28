@@ -1,4 +1,4 @@
-CREATE TABLE "paymentTable" (
+CREATE TABLE paymenttable (
   "amount" INT,
   "type" TEXT,
   "id" SERIAL UNIQUE,

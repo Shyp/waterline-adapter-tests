@@ -1,4 +1,4 @@
-CREATE TABLE "customer_manyTable" (
+CREATE TABLE customer_many (
   "name" TEXT,
   "id" SERIAL UNIQUE,
   "createdAt" TIMESTAMP WITH TIME ZONE,

@@ -15,7 +15,7 @@ describe('Semantic Interface', function() {
         { first_name: 'createEach_2', type: 'createEach' }
       ];
 
-      Semantic.User.createEach(usersArray, function(err, users) {
+      Semantic.Usertable.createEach(usersArray, function(err, users) {
         assert.ifError(err);
         assert(Array.isArray(users));
         assert.strictEqual(users.length, 2);
@@ -24,7 +24,7 @@ describe('Semantic Interface', function() {
     });
 
     it('should insert 2 records verififed by find', function(done) {
-      Semantic.User.find({ type: 'createEach' }, function(err, users) {
+      Semantic.Usertable.find({ type: 'createEach' }, function(err, users) {
         assert.ifError(err);
         assert.strictEqual(users.length, 2);
         done();
@@ -37,7 +37,7 @@ describe('Semantic Interface', function() {
         { first_name: 'createEach_4', type: 'createEach' }
       ];
 
-      Semantic.User.createEach(usersArray, function(err, users) {
+      Semantic.Usertable.createEach(usersArray, function(err, users) {
         assert(users[0].id);
         assert.equal(typeof users[0].fullName, 'function');
         assert.equal(toString.call(users[0].createdAt), '[object Date]');

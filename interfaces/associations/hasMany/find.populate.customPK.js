@@ -33,7 +33,7 @@ describe('Association Interface', function() {
             if(i >= 4) payments.push({ amount: i, apartment: apartments[1].number });
           }
 
-          Associations.Payment.createEach(payments, function(err, payments) {
+          Associations.Paymenttable.createEach(payments, function(err, payments) {
             if(err) return done(err);
             done();
           });

@@ -12,7 +12,7 @@ describe('Association Interface', function() {
     var customers, payments;
 
     before(function(done) {
-      Associations.Customer.createEach([{
+      Associations.Customertable.createEach([{
           name: 'foo'
         }, {
           name: 'bar'
@@ -22,7 +22,7 @@ describe('Association Interface', function() {
         // Expose results for examination below
         customers = _customers;
 
-        Associations.Payment.createEach([{
+        Associations.Paymenttable.createEach([{
             amount: 1,
             type: 'belongsTo find',
             a_customer: customers[0].id
@@ -47,7 +47,7 @@ describe('Association Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should return a customer when the populate criteria is added', function(done) {
-        Associations.Payment.find({ type: 'belongsTo find', sort: 'amount ASC' })
+        Associations.Paymenttable.find({ type: 'belongsTo find', sort: 'amount ASC' })
         .populate('a_customer')
         .exec(function(err, _payments) {
           assert(!err, err);
@@ -76,7 +76,7 @@ describe('Association Interface', function() {
       });
 
       it('should not return a customer object when the populate is not added', function(done) {
-        Associations.Payment.find()
+        Associations.Paymenttable.find()
         .exec(function(err, payments) {
           assert.ifError(err);
 
@@ -88,7 +88,7 @@ describe('Association Interface', function() {
       });
 
       it('should call toJSON on associated record', function(done) {
-        Associations.Payment.find()
+        Associations.Paymenttable.find()
         .populate('a_customer')
         .exec(function(err, payments) {
           assert.ifError(err);

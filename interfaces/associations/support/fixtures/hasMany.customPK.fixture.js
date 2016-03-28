@@ -19,7 +19,7 @@ module.exports = Waterline.Collection.extend({
       unique: true
     },
     payments: {
-      collection: 'Payment',
+      collection: 'Paymenttable',
       via: 'apartment'
     }
   }

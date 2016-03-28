@@ -16,12 +16,12 @@ describe('Association Interface', function() {
 
         // Create A Customer and a payment
         before(function(done) {
-          Associations.Customer.create({ name: 'hasMany add' }, function(err, model) {
+          Associations.Customertable.create({ name: 'hasMany add' }, function(err, model) {
             if(err) return done(err);
 
             customerRecord = model;
 
-            Associations.Payment.create({ amount: 1, customer: model.id }, function(err, payment) {
+            Associations.Paymenttable.create({ amount: 1, customer: model.id }, function(err, payment) {
               if(err) return done(err);
 
               paymentRecord = payment;
@@ -41,7 +41,7 @@ describe('Association Interface', function() {
             assert.ifError(err);
 
             // Look up the customer again to be sure the payment was added
-            Associations.Customer.findOne(customerRecord.id)
+            Associations.Customertable.findOne(customerRecord.id)
             .populate('payments')
             .exec(function(err, data) {
               assert.ifError(err);
@@ -62,7 +62,7 @@ describe('Association Interface', function() {
         var customerRecord;
 
         before(function(done) {
-          Associations.Customer.create({ name: 'hasMany add' }, function(err, model) {
+          Associations.Customertable.create({ name: 'hasMany add' }, function(err, model) {
             if(err) return done(err);
             customerRecord = model;
             done();

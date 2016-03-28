@@ -10,7 +10,7 @@ describe('Semantic Interface', function() {
     ////////////////////////////////////////////////////
 
     it('should create a new record', function(done) {
-      Semantic.User.create({ first_name: 'Foo' }, function(err, record) {
+      Semantic.Usertable.create({ first_name: 'Foo' }, function(err, record) {
         if (err) { console.error(err); }
         assert.ifError(err);
         assert.equal(record.first_name, 'Foo');
@@ -19,7 +19,7 @@ describe('Semantic Interface', function() {
     });
 
     it('should return a generated PK', function(done) {
-      Semantic.User.create({ first_name: 'FooBar' }, function(err, user) {
+      Semantic.Usertable.create({ first_name: 'FooBar' }, function(err, user) {
         if (err) { console.error(err); }
         assert.ifError(err);
         assert.equal(user.first_name, 'FooBar');
@@ -29,7 +29,7 @@ describe('Semantic Interface', function() {
     });
 
     it('should return generated timestamps', function(done) {
-      Semantic.User.create({ first_name: 'Foo', last_name: 'Bar' }, function(err, user) {
+      Semantic.Usertable.create({ first_name: 'Foo', last_name: 'Bar' }, function(err, user) {
         if (err) { console.error(err); }
         assert.ifError(err);
         assert.equal(toString.call(user.createdAt), '[object Date]');
@@ -39,7 +39,7 @@ describe('Semantic Interface', function() {
     });
 
     it('should return a model instance', function(done) {
-      Semantic.User.create({ first_name: 'Foo', last_name: 'Bar' }, function(err, user) {
+      Semantic.Usertable.create({ first_name: 'Foo', last_name: 'Bar' }, function(err, user) {
         if (err) { console.error(err); }
         assert.ifError(err);
         assert.equal(user.fullName(), 'Foo Bar');
@@ -48,7 +48,7 @@ describe('Semantic Interface', function() {
     });
 
     it('should normalize undefined values to null', function(done) {
-      Semantic.User.create({ first_name: 'Yezy', last_name: undefined }, function(err, user) {
+      Semantic.Usertable.create({ first_name: 'Yezy', last_name: undefined }, function(err, user) {
         assert.ifError(err);
         assert.equal(user.last_name, null);
         done();
@@ -62,7 +62,7 @@ describe('Semantic Interface', function() {
       for(var i=0; i<30; i++) {
         users.push({ first_name: 'test_' + i, type: testName });
       }
-      Semantic.User.create(users, function(err, users) {
+      Semantic.Usertable.create(users, function(err, users) {
         assert.ifError(err);
         users.forEach(function(val, idx){
           assert.equal(users[idx].first_name, 'test_' + idx);
@@ -87,7 +87,7 @@ describe('Semantic Interface', function() {
           users.push({ first_name: 'test_' + i, type: testName });
         }
 
-        Semantic.User.create(users, done);
+        Semantic.Usertable.create(users, done);
       });
 
 
@@ -96,7 +96,7 @@ describe('Semantic Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should have saved the proper values (with auto-increment values)', function(done) {
-        Semantic.User.find({where : { type: testName }, sort : {first_name : 1}}, function(err, users) {
+        Semantic.Usertable.find({where : { type: testName }, sort : {first_name : 1}}, function(err, users) {
           if (err) return done(err);
           assert.ifError(err);
           assert.equal(users.length, 4, 'Expecting 4 "users", but actually got '+users.length+': '+require('util').inspect(users, false, null));

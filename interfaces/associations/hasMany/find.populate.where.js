@@ -18,7 +18,7 @@ describe('Association Interface', function() {
 
     before(function(done) {
 
-      Associations.Customer.createEach([{
+      Associations.Customertable.createEach([{
         name: 'hasMany find where', capital : 1000
       }, {
         name: 'hasMany find where', capital : 2000
@@ -26,7 +26,7 @@ describe('Association Interface', function() {
       function(err, customers) {
         if(err) return done(err);
 
-        Associations.Customer.find({ name: 'hasMany find where'})
+        Associations.Customertable.find({ name: 'hasMany find where'})
         .sort('capital asc')
         .exec(function(err, customers) {
           if(err) return done(err);
@@ -40,7 +40,7 @@ describe('Association Interface', function() {
             if(i >= 4) payments.push({ amount: i, a_customer: customers[1].id });
           }
 
-          Associations.Payment.createEach(payments, function(err, payments) {
+          Associations.Paymenttable.createEach(payments, function(err, payments) {
             if(err) return done(err);
             done();
           });
@@ -55,7 +55,7 @@ describe('Association Interface', function() {
       ////////////////////////////////////////////////////
 
       it('should return only payments less than or equal to 2', function(done) {
-        Associations.Customer.find({ name: 'hasMany find where' })
+        Associations.Customertable.find({ name: 'hasMany find where' })
         .populate('payments', { amount: { '<': 2 }, limit: 2, sort: { amount: 1 }})
         .sort('capital asc')
         .exec(function(err, customers) {
@@ -80,7 +80,7 @@ describe('Association Interface', function() {
       });
 
       it('should return payments using skip and limit', function(done) {
-        Associations.Customer.find({ name: 'hasMany find where' })
+        Associations.Customertable.find({ name: 'hasMany find where' })
         .populate('payments', { skip: 1, limit: 2, sort: { amount: 1 } })
         .sort('capital asc')
         .exec(function(err, customers) {
@@ -115,10 +115,10 @@ describe('Association Interface', function() {
       it('should allow filtering by primary key', function(done) {
 
         // Find the payments
-        Associations.Payment.findOne({ amount: 1, a_customer: Customer.id }).exec(function(err, payment) {
+        Associations.Paymenttable.findOne({ amount: 1, a_customer: Customer.id }).exec(function(err, payment) {
           if(err) return done(err);
 
-          Associations.Customer.find({ name: 'hasMany find where' })
+          Associations.Customertable.find({ name: 'hasMany find where' })
           .populate('payments', {where : { id: payment.id }, sort : {amount : 1}})
           .sort('capital asc')
           .exec(function(err, customers) {
