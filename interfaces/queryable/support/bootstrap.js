@@ -7,7 +7,7 @@ var path = require('path');
 
 var _ = require('lodash');
 var async = require('async');
-var pg = require('pg').native;
+var pg = require('pg');
 
 var Waterline = require('waterline');
 

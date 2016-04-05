@@ -5,7 +5,7 @@ var fs = require('fs');
 var path = require('path');
 
 var async = require('async');
-var pg = require('pg').native;
+var pg = require('pg');
 
 var bootstrapFn = require('./bootstrapFn');
 
